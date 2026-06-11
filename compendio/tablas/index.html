@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayudantía MA - Tabla de Transformadas de Fourier (Convención Simétrica Unitaria)</title>
+    
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [["\\(", "\\)"]],
+            displayMath: [["\\[", "\\]"]],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*|",
+            processHtmlClass: "arithmatex"
+          }
+        };
+    </script>
+    <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+    <style>
+        :root {
+            --fondo: #1e1e2e;
+            --texto: #cdd6f4;
+            --titulos: #ffffff;
+            --links: #89b4fa;
+            --bloques: #252538;
+        }
+
+        body {
+            background-color: var(--fondo);
+            color: var(--texto);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Estilo del Contenido */
+        h1, h2, h3, h4 {
+            color: var(--titulos);
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.2rem; border-bottom: 1px solid #313244; padding-bottom: 0.5rem; }
+        h2 { font-size: 1.6rem; }
+
+        a { color: var(--links); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: var(--bloques);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--bloques);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .arithmatex {
+            color: var(--titulos);
+        }
+
+        .todo-centrado {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="">
+        <h1 id="tabla-de-transformadas-de-fourier-convencion-simetrica-unitaria">Tabla de Transformadas de Fourier (Convención Simétrica Unitaria)</h1>
+<p>Definiciones base empleadas para construir las tablas:</p>
+<ul>
+<li><strong>Transformada Directa:</strong> <span class="arithmatex">\(\hat{f}(\omega) = \mathcal{F}\{f(t)\} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt\)</span></li>
+<li><strong>Transformada Inversa:</strong> <span class="arithmatex">\(f(t) = \mathcal{F}^{-1}\{\hat{f}(\omega)\} = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} \hat{f}(\omega) e^{i\omega t} d\omega\)</span></li>
+</ul>
+<hr />
+<h2 id="1-propiedades-operacionales">1. Propiedades Operacionales</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Propiedad</th>
+<th style="text-align: left;">Función en el tiempo <span class="arithmatex">\(f(t), g(t)\)</span></th>
+<th style="text-align: left;">Transformada en frecuencia <span class="arithmatex">\(\hat{f}(\omega), \hat{g}(\omega)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Linealidad</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(a f(t) + b g(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(a \hat{f}(\omega) + b \hat{g}(\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Desplazamiento temporal</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(f(t - t_0)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(e^{-i\omega t_0} \hat{f}(\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Desplazamiento frecuencial</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(e^{i\omega_0 t} f(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\hat{f}(\omega - \omega_0)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Escalamiento</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(f(at)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\vert a \vert} \hat{f}\left(\frac{\omega}{a}\right)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Simetría (Dualidad)</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\hat{f}(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(f(-\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Conjugación</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(f^*(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\hat{f}^*(-\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Derivación en el tiempo</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(f^{(n)}(t) = \frac{d^n}{dt^n}f(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\((i\omega)^n \hat{f}(\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Derivación en frecuencia</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\((-it)^n f(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\hat{f}^{(n)}(\omega) = \frac{d^n}{d\omega^n}\hat{f}(\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Integración temporal</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\int_{-\infty}^{t} f(\tau) d\tau\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{i\omega} \hat{f}(\omega) + \pi \hat{f}(0) \delta(\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Convolución</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\((f * g)(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{2\pi} \hat{f}(\omega) \hat{g}(\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Multiplicación</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(f(t) g(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\sqrt{2\pi}} (\hat{f} * \hat{g})(\omega)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Teorema de Parseval</strong></td>
+<td style="text-align: left;"><span class="arithmatex">\(\int_{-\infty}^{\infty} \vert f(t) \vert^2 dt\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\int_{-\infty}^{\infty} \vert \hat{f}(\omega) \vert^2 d\omega\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-pares-comunes-de-transformadas">2. Pares Comunes de Transformadas</h2>
+<p><em>Nota: En esta sección, <span class="arithmatex">\(a &gt; 0\)</span> es una constante real, <span class="arithmatex">\(\delta(t)\)</span> representa el impulso de Dirac y <span class="arithmatex">\(u(t)\)</span> es la función escalón de Heaviside.</em></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Función en el tiempo <span class="arithmatex">\(f(t)\)</span></th>
+<th style="text-align: left;">Transformada de Fourier <span class="arithmatex">\(\hat{f}(\omega)\)</span></th>
+<th style="text-align: left;">Notas / Condiciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\delta(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\sqrt{2\pi}}\)</span></td>
+<td style="text-align: left;">Impulso de Dirac (Espectro plano)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\delta(t - t_0)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\sqrt{2\pi}} e^{-i\omega t_0}\)</span></td>
+<td style="text-align: left;">Impulso desplazado en el tiempo</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(1\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{2\pi} \delta(\omega)\)</span></td>
+<td style="text-align: left;">Constante / Componente de continua (DC)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(e^{i\omega_0 t}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{2\pi} \delta(\omega - \omega_0)\)</span></td>
+<td style="text-align: left;">Exponencial compleja pura</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\cos(\omega_0 t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{\frac{\pi}{2}} [\delta(\omega - \omega_0) + \delta(\omega + \omega_0)]\)</span></td>
+<td style="text-align: left;">Función Coseno</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\sin(\omega_0 t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(-i\sqrt{\frac{\pi}{2}} [\delta(\omega - \omega_0) - \delta(\omega + \omega_0)]\)</span></td>
+<td style="text-align: left;">Función Seno</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\text{sgn}(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{\frac{2}{\pi}} \frac{1}{i\omega}\)</span></td>
+<td style="text-align: left;">Función signo</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(u(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{\frac{\pi}{2}} \delta(\omega) + \frac{1}{i\omega\sqrt{2\pi}}\)</span></td>
+<td style="text-align: left;">Escalón unitario</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(e^{-at} u(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\sqrt{2\pi}(a + i\omega)}\)</span></td>
+<td style="text-align: left;">Exponencial decreciente causal</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(e^{-a\vert t \vert}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{\frac{2}{\pi}} \frac{a}{a^2 + \omega^2}\)</span></td>
+<td style="text-align: left;">Exponencial decreciente bilateral</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\text{rect}\left(\frac{t}{2a}\right)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\sqrt{\frac{2}{\pi}} \frac{\sin(a\omega)}{\omega}\)</span></td>
+<td style="text-align: left;">Pulso rectangular (Vale <span class="arithmatex">\(1\)</span> si <span class="arithmatex">\(\vert t \vert &lt; a\)</span>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{\sin(at)}{\pi t}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\sqrt{2\pi}} \text{rect}\left(\frac{\omega}{2a}\right)\)</span></td>
+<td style="text-align: left;">Función sinc (Dual del pulso rectangular)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(e^{-at^2}\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\sqrt{2a}} e^{-\frac{\omega^2}{4a}}\)</span></td>
+<td style="text-align: left;">Campana de Gauss (Autodual si <span class="arithmatex">\(a = 1/2\)</span>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(t u(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(i\sqrt{\frac{\pi}{2}} \delta'(\omega) - \frac{1}{\sqrt{2\pi}\omega^2}\)</span></td>
+<td style="text-align: left;">Función rampa causal</td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(t e^{-at} u(t)\)</span></td>
+<td style="text-align: left;"><span class="arithmatex">\(\frac{1}{\sqrt{2\pi}(a + i\omega)^2}\)</span></td>
+<td style="text-align: left;">Multiplicación por rampa causal</td>
+</tr>
+</tbody>
+</table>
+    </main>
+
+</body>
+</html>
