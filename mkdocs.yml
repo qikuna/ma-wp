@@ -1,4 +1,5 @@
 site_name: Ayudantía MA
+site_url: https://ma.qikuna.com/
 theme:
   name: null
   custom_dir: labels
