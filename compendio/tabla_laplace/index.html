@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayudantía MA - Tabla de Transformadas de Laplace (Convención: \(x \to s\))</title>
+    
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [["\\(", "\\)"]],
+            displayMath: [["\\[", "\\]"]],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          options: {
+            ignoreHtmlClass: ".*|",
+            processHtmlClass: "arithmatex"
+          }
+        };
+    </script>
+    <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+    <style>
+        :root {
+            --fondo: #1e1e2e;
+            --texto: #cdd6f4;
+            --titulos: #ffffff;
+            --links: #89b4fa;
+            --bloques: #252538;
+        }
+
+        body {
+            background-color: var(--fondo);
+            color: var(--texto);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Estilo del Contenido */
+        h1, h2, h3, h4 {
+            color: var(--titulos);
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.2rem; border-bottom: 1px solid #313244; padding-bottom: 0.5rem; }
+        h2 { font-size: 1.6rem; }
+
+        a { color: var(--links); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        code {
+            background-color: var(--bloques);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: var(--bloques);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .arithmatex {
+            color: var(--titulos);
+        }
+
+        .todo-centrado {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="">
+        <h1 id="tabla-de-transformadas-de-laplace-convencion-x-to-s">Tabla de Transformadas de Laplace (Convención: <span class="arithmatex">\(x \to s\)</span>)</h1>
+<div class="arithmatex">\[\mathcal{L}[f](s) = \int_{0}^{\infty} f(x)e^{-sx} dx\]</div>
+<hr />
+<h2 id="1-propiedades-operacionales">1. Propiedades operacionales</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Propiedad</th>
+<th style="text-align: center;">Dominio <span class="arithmatex">\(x\)</span></th>
+<th style="text-align: center;">Dominio <span class="arithmatex">\(s\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Linealidad</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(\alpha f(x) + \beta g(x)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\alpha F(s) + \beta G(s)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Primer Teorema de Traslación</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{ax} f(x)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(F(s-a)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Segundo Teorema de Traslación</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(f(x-a)u(x-a)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-as}F(s)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Escalamiento de eje</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(f(ax)\)</span> con <span class="arithmatex">\(a &gt; 0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{1}{a} F\left(\frac{s}{a}\right)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Derivada de primer orden</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(f'(x)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(sF(s) - f(0)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Derivada de segundo orden</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(f''(x)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s^2F(s) - sf(0) - f'(0)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Derivada de orden <span class="arithmatex">\(n\)</span></strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(f^{(n)}(x)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s^nF(s) - s^{n-1}f(0) - \cdots - f^{(n-1)}(0)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Integral de la función</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(\int_{0}^{x} f(\tau) d\tau\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{F(s)}{s}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Multiplicación por <span class="arithmatex">\(x^n\)</span></strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(x^n f(x)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((-1)^n \frac{d^n}{ds^n} F(s)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>División por <span class="arithmatex">\(x\)</span></strong></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{f(x)}{x}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\int_{s}^{\infty} F(\sigma) d\sigma\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Convolución</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((f * g)(x) = \int_{0}^{x} f(\tau)g(x-\tau)d\tau\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(F(s)G(s)\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-transformadas-de-funciones-elementales">2. Transformadas de funciones elementales</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Función en el dominio <span class="arithmatex">\(x\)</span></th>
+<th style="text-align: center;">Transformada <span class="arithmatex">\(F(s) = \mathcal{L}[f](s)\)</span></th>
+<th style="text-align: center;">Región de convergencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{1}{s}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(x\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{1}{s^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(x^n\)</span> (<span class="arithmatex">\(n \in \mathbb{N}\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{n!}{s^{n+1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(x^a\)</span> (<span class="arithmatex">\(a &gt; -1\)</span>, <span class="arithmatex">\(a \in \mathbb{R}\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{\Gamma(a+1)}{s^{a+1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(e^{ax}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{1}{s-a}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; a\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(x^n e^{ax}\)</span> (<span class="arithmatex">\(n \in \mathbb{N}\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{n!}{(s-a)^{n+1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; a\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\sin(ax)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{a}{s^2 + a^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\cos(ax)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{s}{s^2 + a^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\sinh(ax)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{a}{s^2 - a^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; \lvert a \rvert\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\cosh(ax)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{s}{s^2 - a^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; \lvert a \rvert\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(e^{ax}\sin(bx)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{b}{(s-a)^2 + b^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; a\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(e^{ax}\cos(bx)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{s-a}{(s-a)^2 + b^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; a\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(x\sin(ax)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{2as}{(s^2+a^2)^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(x\cos(ax)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{s^2-a^2}{(s^2+a^2)^2}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\delta(x)\)</span> (Delta de Dirac)</td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+<td style="text-align: center;">Todo <span class="arithmatex">\(s\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(\delta(x-a)\)</span> (<span class="arithmatex">\(a &gt; 0\)</span>)</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-as}\)</span></td>
+<td style="text-align: center;">Todo <span class="arithmatex">\(s\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><span class="arithmatex">\(u(x-a)\)</span> (Escalón unitario)</td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{e^{-as}}{s}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(s &gt; 0\)</span></td>
+</tr>
+</tbody>
+</table>
+    </main>
+
+</body>
+</html>
